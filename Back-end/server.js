@@ -3,12 +3,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dbConfig = require("./app/config/db.config");
 const app = express();
-
+const path = __dirname +'/app/views/';
 
 var corsOptions = {
     origin: "http://localhost:8081"
 };
-
+app.use(express.static(path));
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -30,8 +30,8 @@ db.mongoose
         process.exit();
     });
 //simple route
-app.get("/",(req,res) =>{
-    res.json({message:"Wellcome to ChinhIoT application"});
+app.get('/',function(req,res){
+    res.sendFile(path +"index.html");
 });
 require("./app/routes/tutorial.routes")(app);
 //set port, listen for request
