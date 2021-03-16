@@ -51,3 +51,12 @@
   max-width: 300px;
   margin: auto;
 }
+.container{
+  background-color: #1ca856;
+}
+.input-group-append{
+  background-color: rgb(233, 42, 35);
+}
+.btn{
+  background-color: rgb(228, 66, 48);
+}

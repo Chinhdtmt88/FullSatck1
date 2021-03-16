@@ -9,7 +9,7 @@ export default class Tutorial extends Component{
         this.getTutorial = this.getTutorial.bind(this);
         this.updatePublished = this.updatePublished.bind(this);
         this.updateTutorial = this.updateTutorial.bind(this);
-       // this.deleteTutorial = this.deleteTutorial.bind(this);
+        this.deleteTutorial = this.deleteTutorial.bind(this);
 
         this.state ={
             currentTutorial:{
@@ -94,15 +94,26 @@ export default class Tutorial extends Component{
         )
         .then(response =>{
             console.log(response.data);
-            this.props.history.push('/tutorials')
+            this.setState({
+                message:"The tutorial was update successfully"
+            });
         })
         .catch(e => {
             console.log(e);
         });
     }
-
+    deleteTutorial() {    
+        TutorialDataService.delete(this.state.currentTutorial.id)
+          .then(response => {
+            console.log(response.data);
+            this.props.history.push('/tutorials')
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
     render() {
-        const { currentTutorial } =this.state;
+        const { currentTutorial } = this.state;
         return(
             <div>
                 {currentTutorial ?(

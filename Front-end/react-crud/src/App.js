@@ -3,45 +3,46 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import { styles } from "./css-common"
 import AddTutorial from "./components/add-tutorial.component";
 import Tutorial from "./components/tutorial.component";
 import TutorialsList from "./components/tutorials-list.component";
 
-
+import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core';
 class App extends Component {
   render() {
+    const { classes } = this.props
     return(
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/tutorials" className="navbar-brand">
-            ChinhIoT
-          </a>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/tutorials"} className="nav-link">
+        <AppBar className={classes.appBar} position="static">
+          <Toolbar>
+            <Typography className={classes.name} variant="h6">
+              Chinh IoT
+            </Typography>
+            <Link to={"/tutorials"} className={classes.link}>
+              <Typography variant="body2">
                 Tutorials
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
+              </Typography>  
+            </Link>
+            <Link to={"/add"} className={classes.link}>
+              <Typography variant="body2">
                 Add
-              </Link>
-            </li>
-          </div>
-        </nav>
+              </Typography>  
+            </Link> 
+          </Toolbar>
+        </AppBar>
 
-        <div className="container mt-3">
+       
           <Switch>
             <Route exact path={["/","/tutorials"]} component={TutorialsList}/>
             <Route exact path="/add" component={AddTutorial} />
             <Route path="/tutorials/:id" component={Tutorial} />
           </Switch>
-        </div>
-
+        
 
       </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles) (App);
